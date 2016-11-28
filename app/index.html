@@ -1,0 +1,80 @@
+
+<html>
+	<head>
+		<meta charset=utf-8 />
+		<title>A simple map</title>
+
+		<script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
+		<script src='client-js/client.js'></script>
+		<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		-->
+		<link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		
+		<link href='css/style.css' rel='stylesheet' />
+	</head>
+	
+	<body>
+		<div class='container-fluid' id='map-wrapper'>
+			<div class='row-100'>
+				<div class='col-md-10' id='map-wrapper'>
+					<div id='map' >
+					</div>
+				</div>
+				<div class='col-md-2' id='map-wrapper'>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<h1><strong>Deli</strong></h1>
+								<p><strong>Your one and only delivery helper needed.</strong></p>
+							</div>
+						</div>
+						<hr class="first"/>
+						<div class="row register">
+							<div class="col-md-12">
+								<label for="btn-query2">For setting up your restaurant other than default click on map and then on this button:</label>
+								<button class="btn btn-primary" id='btn-query2'>REGISTER RESTAURANT</button>
+							</div>
+						</div>
+						<hr/>
+						<div class="row request">
+							<div class="col-md-12">
+								<label for="btn-query1">For inserting delivery destination by address fill in the field below and click on button below:</label>
+								<input type="text" class="form-control" id="addr"/>
+								<button class="btn btn-primary" id='btn-query1'>DELIVERY BY ADDRESS</button>
+							</div>
+						</div>
+						<hr/>
+						<div class="row request">
+							<div class="col-md-12">
+								<label for="btn-query1">For inserting delivery destination by point on map click on map and then click on button below:</label>
+								<button class="btn btn-primary" id='btn-query3'>DELIVERY BY POINT</button>
+							</div>
+						</div>
+						<hr/>
+						<div class="row finalize">
+							<div class="col-md-12">
+								<label for="btn-query1">For sumarization of delivery click on button below:</label>
+								<button class="btn btn-primary" id='btn-query4'>SUMARIZE DELIVERY</button>
+							</div>
+						</div>
+						<hr/>
+						<div class="row clear">
+							<div class="col-md-12">
+								<label for="btn-query1">For clearing all data except location of your restaurant click here:</label>
+								<button class="btn btn-danger" id='btn-clear'>CLEAR ALL</button>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+		
+		
+		
+		
+	</body>
+	
+</html>
