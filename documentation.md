@@ -10,7 +10,7 @@ Webová aplikácia určená na pomoc dispečerom kuriérov v reštauráciách. P
 
 This is it in action:
 
-![Screenshot](UI1.png)
+![Screenshot](UI1.PNG)
 
 Webová aplikácia je rozdelená na frontendovú a backendovú časť. [Frontend](#frontend) využíva mapbox API a mapbox.js. [Backend](#backend) je napísaný v JavaScripte, postavený na Node.js JavaScript runtime environment. Databáza je uložená v PostGIS. Frontend komunikuje s backendom pomocou [REST API](#api).
 
