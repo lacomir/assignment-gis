@@ -17,29 +17,29 @@
 	<body>
 		<div class='container-fluid' id='map-wrapper'>
 			<div class='row-100'>
-				<div class='col-md-10' id='map-wrapper'>
+				<div class='col-md-9' id='map-wrapper'>
 					<div id='map' >
 					</div>
 				</div>
-				<div class='col-md-2' id='map-wrapper'>
+				<div class='col-md-3' id='map-wrapper'>
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-12">
-								<h1><strong>Deli</strong></h1>
+								<h1><strong>DeliMaster</strong></h1>
 								<p><strong>Your one and only delivery helper needed.</strong></p>
 							</div>
 						</div>
 						<hr class="first"/>
 						<div class="row register">
 							<div class="col-md-12">
-								<label for="btn-query2">For setting up your restaurant other than default click on map and then on this button:</label>
+								<label visibility="hidden"  for="btn-query2">Requires map click:</label>
 								<button class="btn btn-primary" id='btn-query2'>REGISTER RESTAURANT</button>
 							</div>
 						</div>
 						<hr/>
 						<div class="row request">
 							<div class="col-md-12">
-								<label for="btn-query1">For inserting delivery destination by address fill in the field below and click on button below:</label>
+								<label visibility="hidden"  for="btn-query1">Requires address without number (with special characters):</label>
 								<input type="text" class="form-control" id="addr"/>
 								<button class="btn btn-primary" id='btn-query1'>DELIVERY BY ADDRESS</button>
 							</div>
@@ -47,21 +47,20 @@
 						<hr/>
 						<div class="row request">
 							<div class="col-md-12">
-								<label for="btn-query1">For inserting delivery destination by point on map click on map and then click on button below:</label>
+								<label visibility="hidden"  for="btn-query1">Requires map click:</label>
 								<button class="btn btn-primary" id='btn-query3'>DELIVERY BY POINT</button>
 							</div>
 						</div>
 						<hr/>
 						<div class="row finalize">
 							<div class="col-md-12">
-								<label for="btn-query1">For sumarization of delivery click on button below:</label>
+								<label visibility="hidden"  for="btn-query1">Estimate best route:</label>
 								<button class="btn btn-primary" id='btn-query4'>SUMARIZE DELIVERY</button>
 							</div>
 						</div>
 						<hr/>
 						<div class="row clear">
 							<div class="col-md-12">
-								<label for="btn-query1">For clearing all data except location of your restaurant click here:</label>
 								<button class="btn btn-danger" id='btn-clear'>CLEAR ALL</button>
 							</div>
 						</div>
@@ -72,7 +71,7 @@
 			
 		</div>
 		
-		
+		<div class="modal"></div>
 		
 		
 	</body>

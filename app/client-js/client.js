@@ -1,6 +1,7 @@
 var map;
 var restaurantMarker = "";
 var markers = [];
+var markersPumpy = [];
 var lines = [];
 var popups = [];
 var click_marker = "";
@@ -19,12 +20,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		L.mapbox.accessToken = 'pk.eyJ1IjoiZHVza3ltYW4iLCJhIjoiY2l2YjExc2lkMDAzeDJvbGFoMGd5bXE4eCJ9.i4-RBGH5AtH-79WmQ9UJPQ';
 		map = L.mapbox.map('map', 'mapbox.streets').setView([48.15, 17.11], 12);
 		
+		click_lat = 48.15034013159828;
+		click_lon = 17.110970020294193;
+		
 		fetch('query2-url', {
 			method: 'POST',
 			headers: new Headers({'Content-Type': 'application/json'}),
 			body: JSON.stringify({
-				click_lat: 48.15034013159828,
-				click_lon: 17.110970020294193
+				click_lat: click_lat,
+				click_lon: click_lon
 			})
 		}).then(successResponse2,errResponse);
 		
@@ -83,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			console.log(my_restaurantLatLon);
 			console.log(deliveriesLatLon);
 			
+			document.getElementsByTagName('body')[0].classList.add("loading");
 			
 			fetch('query4-url', {
 				method: 'POST',
@@ -101,6 +106,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		document.getElementById('btn-clear').addEventListener('click', () => {
 			
 			markers.forEach(function(item){
+				map.removeLayer(item);
+			});
+			
+			markersPumpy.forEach(function(item){
 				map.removeLayer(item);
 			});
 
@@ -274,6 +283,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				map.removeLayer(item);
 			});
 			
+			markersPumpy.forEach(function(item){
+				map.removeLayer(item);
+			});
+			
 			var colors = [
 				'#ffffcc',
 				'#a1dab4',
@@ -320,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 												class: "poradie"
 												})
 							.setLatLng(markers[iter].getLatLng())
-							.setContent('<h2>' + tspItem.seq + '</h2>')
+							.setContent('<h2><strong>' + tspItem.seq + '</strong></h2>')
 							.addTo(map);
 							
 						popups.push(popup);
@@ -329,17 +342,66 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					 iter++;
 				 });
 				 
+				 json.pumpy.forEach(function(pumpa) {
+					 
+					var geojson = JSON.parse(pumpa.geojson);
+
+					var tmp = L.marker([geojson.coordinates[1], geojson.coordinates[0]],{
+						icon: L.mapbox.marker.icon({
+							'marker-size': 'large',
+							'marker-symbol': 'fuel',
+							'marker-color': '#000'
+						}),
+					}).addTo(map);
+
+					markersPumpy.push(tmp);
+				 });
+				 
 				 var x = document.getElementsByClassName("leaflet-popup-close-button");
 				 console.log(x);
 				 for (var i = 0; i < x.length; i++) {
 					x[i].style.visibility='hidden'; //second console output
 				 }
+				 
+				 
+				 json.parkings.rows.forEach(function(parking) {
+					 
+					var geojson = JSON.parse(parking.st_asgeojson);
+					var color;
+					
+					if(parking.distance > 300)
+						color = '#888'
+					else
+						color = '#00f'
+					
+					var tmp = L.marker([geojson.coordinates[1], geojson.coordinates[0]],{
+						icon: L.mapbox.marker.icon({
+							'marker-size': 'large',
+							'marker-symbol': 'parking',
+							'marker-color': color
+						}),
+					}).addTo(map);
+
+					markersPumpy.push(tmp);
+				 });
+				 
+				 restaurantMarker.bindPopup('<span>Courier route total length: ' + json.totlength + ' km<br/>Estimated duration of delivery: ' + (json.totlength/40)*60 + ' min</span>');
+					 
+				 var popup = new L.popup({closeOnClick: false,
+										offset: new L.Point(0, -20),
+										class: "poradie"
+										})
+					.setLatLng(restaurantMarker.getLatLng())
+					.setContent('<h2>Courier route total length: ' + json.totlength + ' km<br/>Estimated duration of delivery: ' + ((json.totlength/40)*60).toFixed(0) + ' min</h2>')
+					.addTo(map);
+					
+				 popups.push(popup);
 
 			 });
 
-			
-			 
 		 }));
+
+		 document.getElementsByTagName('body')[0].classList.remove("loading");
 	 }
  }
  
